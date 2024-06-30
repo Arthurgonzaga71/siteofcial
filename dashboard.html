@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Aniversariante</title>
+    <style>
+        /* Estilos CSS para a página Dashboard do aniversariante */
+        body {
+            background-color: #fde3a7; /* Cor de fundo suave */
+            color: #333; /* Cor do texto principal */
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #6b63ff;
+            color: #fff;
+        }
+
+        .navbar .brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .navbar .menu a {
+            text-decoration: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar .menu a:hover {
+            transform: scale(1.1);
+        }
+
+        .navbar .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .header {
+            background-color: #6b63ff; /* Cor de fundo do cabeçalho */
+            color: #fff; /* Cor do texto do cabeçalho */
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 2rem; /* Espaço abaixo do cabeçalho */
+        }
+
+        .nav-link {
+            background-color: #524bd4;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #3e38a0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff; /* Fundo do conteúdo */
+            border-radius: 10px; /* Borda arredondada */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+        h1 {
+            font-size: 2rem; /* Tamanho da fonte do título */
+            color: #333; /* Cor do título */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Mesclar bordas das células */
+            margin-top: 2rem;
+        }
+
+        table th, table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ccc; /* Linha inferior das células */
+        }
+
+        table th {
+            background-color: #6b63ff; /* Fundo das células do cabeçalho */
+            color: #fff; /* Cor do texto do cabeçalho */
+            text-transform: uppercase; /* Texto em maiúsculas */
+        }
+
+        table td {
+            background-color: #f9f9f9; /* Fundo das células de dados */
+            color: #333; /* Cor do texto das células de dados */
+        }
+
+        .footer {
+            background-color: #333; /* Fundo do rodapé */
+            color: #fff; /* Cor do texto do rodapé */
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.875rem; /* Tamanho da fonte */
+        }
+
+        .footer a {
+            color: #fff; /* Cor do link no rodapé */
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .input-group {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .input-box {
+            width: 30%;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 1px 1px 6px #0000001c;
+            transition: background-color 0.3s;
+        }
+
+        .input-box input:hover {
+            background-color: #f0f0f0;
+        }
+
+        .input-box input:focus-visible {
+            outline: 1px solid #0f0c25;
+        }
+
+        .add-btn {
+            background-color: #6b63ff;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #524bd4;
+        }
+
+        .delete-btn {
+            background-color: #ff4c4c;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .delete-btn:hover {
+            background-color: #e60000;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar .menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #6b63ff;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                z-index: 1;
+                animation: slide-down 0.3s ease;
+            }
+
+            .navbar .menu a {
+                padding: 1rem;
+                text-align: center;
+                border-top: 1px solid #555;
+            }
+
+            .navbar .menu a:first-child {
+                border-top: none;
+            }
+
+            .navbar .menu.show {
+                display: flex;
+            }
+
+            .navbar .menu-toggle {
+                display: block;
+            }
+
+            @keyframes slide-down {
+                from {
+                    transform: translateY(-100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .input-box {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">Meu Aplicativo</div>
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        <div class="menu" id="menu">
+            <a href="index.html" class="nav-link">Voltar à Página de Confirmação</a>
+            <a href="login.html" class="nav-link">Garanta seu ingresso</a>
+            <a href="login-aniversariante.html" class="nav-link">Área do aniversariante</a>
+            <a href="https://www.linkedin.com/in/arthur-gonzaga-42b989257/">Contato</a>
+        </div>
+    </nav>
+
+    <header class="header">
+        <h1>Área do Aniversariante</h1>
+    </header>
+
+    <div class="container">
+        <h1>Lista de Convidados</h1>
+        <div class="input-group">
+            <div class="input-box">
+                <input id="add-firstname" type="text" placeholder="Primeiro Nome">
+            </div>
+            <div class="input-box">
+                <input id="add-lastname" type="text" placeholder="Sobrenome">
+            </div>
+            <div class="input-box">
+                <input id="add-guests" type="number" placeholder="Número de Acompanhantes">
+            </div>
+            <button class="add-btn" onclick="addGuest()">Adicionar Convidado</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Número de Acompanhantes</th>
+                    <th>Data/Hora de Confirmação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="guest-list">
+                <!-- Dados dos convidados serão inseridos aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="footer">
+        Criado pelo Dev Arthur Gonzaga <span style="cursor: pointer;">↓</span> <a href="https://www.linkedin.com/in/arthur-gonzaga-42b989257/" target="_blank">LinkedIn</a>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            renderGuestList();
+
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('menu');
+
+            menuToggle.addEventListener('click', function() {
+                menu.classList.toggle('show');
+            });
+        });
+
+        function renderGuestList() {
+            const guestList = JSON.parse(localStorage.getItem('guests')) || [];
+            const guestListElement = document.getElementById('guest-list');
+            guestListElement.innerHTML = ''; // Limpa a lista antes de renderizar novamente
+
+            // Ordena a lista de convidados por data/hora de confirmação
+            guestList.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            guestList.forEach((guest, index) => {
+                const row = document.createElement('tr');
+
+                const firstnameCell = document.createElement('td');
+                firstnameCell.textContent = guest.firstname;
+                row.appendChild(firstnameCell);
+
+                const lastnameCell = document.createElement('td');
+                lastnameCell.textContent = guest.lastname;
+                row.appendChild(lastnameCell);
+
+                const guestsCell = document.createElement('td');
+                guestsCell.textContent = guest.guests;
+                row.appendChild(guestsCell);
+
+                const timestampCell = document.createElement('td');
+                timestampCell.textContent = guest.timestamp;
+                row.appendChild(timestampCell);
+
+                const actionsCell = document.createElement('td');
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Excluir';
+                deleteButton.className = 'delete-btn';
+                deleteButton.onclick = () => deleteGuest(index);
+                actionsCell.appendChild(deleteButton);
+                row.appendChild(actionsCell);
+
+                guestListElement.appendChild(row);
+            });
+        }
+
+        function addGuest() {
+            const firstname = document.getElementById('add-firstname').value;
+            const lastname = document.getElementById('add-lastname').value;
+            const guests = document.getElementById('add-guests').value;
+            const timestamp = new Date().toLocaleString();
+
+            if (firstname && lastname && guests) {
+                const newGuest = { firstname, lastname, guests, timestamp };
+
+                let guestList = JSON.parse(localStorage.getItem('guests')) || [];
+                guestList.push(newGuest);
+                localStorage.setItem('guests', JSON.stringify(guestList));
+
+                // Limpa os campos do formulário após a adição
+                document.getElementById('add-firstname').value = '';
+                document.getElementById('add-lastname').value = '';
+                document.getElementById('add-guests').value = '';
+
+                renderGuestList();
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        }
+
+        function deleteGuest(index) {
+            let guestList = JSON.parse(localStorage.getItem('guests')) || [];
+            guestList.splice(index, 1);
+            localStorage.setItem('guests', JSON.stringify(guestList));
+            renderGuestList();
+        }
+    </script>
+</body>
+</html>

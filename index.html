@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem Vindo ao meu Aniversário</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        .navbar .brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .navbar .menu a {
+            text-decoration: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar .menu a:hover {
+            transform: scale(1.1);
+        }
+
+        .navbar .menu a.active {
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+
+        .navbar .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .navbar .menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #343a40;
+            }
+
+            .navbar .menu a {
+                padding: 1rem;
+                text-align: center;
+                border-top: 1px solid #555;
+            }
+
+            .navbar .menu a:first-child {
+                border-top: none;
+            }
+
+            .navbar .menu.show {
+                display: flex;
+            }
+
+            .navbar .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Content styles */
+        .content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Button styles */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        /* Footer styles */
+        .footer {
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 50px;
+            color: #555;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+        }
+
+        .footer a {
+            color: #555;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">Meu Aplicativo</div>
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        <div class="menu" id="menu">
+            <a href="login.html" class="active">Garanta seu ingresso</a>
+            <a href="login-aniversariante.html">Área do aniversariante</a>
+            <a href="https://www.linkedin.com/in/arthur-gonzaga-42b989257/">Contato</a>
+        </div>
+    </nav>
+    
+    <div class="content">
+        <h1>Bem-vindo ao Meu Aniversário</h1>
+        <p>Escolha uma opção abaixo:</p>
+        <div class="btn-container">
+            <button class="btn btn-primary"><a href="login.html">Garanta seu ingresso</a></button>
+            <button class="btn btn-secondary"><a href="login-aniversariante.html">Área do Aniversariante</a></button>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+        Criado pelo Dev <a href="https://www.linkedin.com/in/arthur-gonzaga-42b989257/" target="_blank">Arthur Gonzaga</a>
+    </footer>
+
+    <script>
+        // Toggle the menu in mobile view
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('show');
+        });
+
+        // Highlight the active menu item
+        const menuItems = document.querySelectorAll('.menu a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
